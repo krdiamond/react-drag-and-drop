@@ -14,15 +14,17 @@ class App extends Component {
       mouseX: 0,
       mouseY: 0,
       cells: [
-        {x:100, y:100, id:0, holded: false},
-        {x:150, y:150, id:1, holded: false},
-        {x:200, y:200, id:2, holded: false}
+        {x:100, y:100, idx:0, id:'cell0'},
+        {x:150, y:150, idx:1, id:'cell1'},
+        {x:200, y:200, idx:2, id:'cell2'}
       ],
       holdIndex: -1,
     };
 
 //---------------------------------------------------------- WHEN BOX IS CLICKED
-  handleCellMouseDown = (e, idx) => {
+//this receives the onclick event and idx through props from the cell
+//
+  findTheMovingCellOnMouseDown = (e, idx) => {
     this.setState({
       oldMouseX: e.clientX,
       oldMouseY: e.clientY,
@@ -31,7 +33,7 @@ class App extends Component {
   }
 
 //---------------------------------------------------------- WHEN BOX IS DRAGGED
-  handleCellMouseMove = (e) => {
+  handleMouseMove = (e) => {
     //console.log('mouse move');
     let dx = e.clientX - this.state.mouseX;;
     let dy = e.clientY - this.state.mouseY;
@@ -57,16 +59,16 @@ class App extends Component {
 
 //----------------------------------------------------------------------- RENDER
   render() {
-//-------------- MAP THROUGH ALL CELLS IN STATE AND PROVIDE PROPS AND X/Y COORDS
+//----------------------------------------------- MAP THROUGH ALL BOXES IN STATE
     let cells = this.state.cells.map((cell) => {
         return (
           <Cell
-            key={cell.id}
+            key={cell.idx}
             id={cell.id}
+            idx={cell.idx}
             x={cell.x}
             y={cell.y}
-            onMouseDown={this.handleCellMouseDown}
-            onMouseUp={this.handleCellMouseUp}
+            findTheMovingCell={this.findTheMovingCellOnMouseDown}
           />
         );
       }
@@ -76,7 +78,7 @@ class App extends Component {
       <div
         id = "app"
         onMouseUp={this.handleMouseUp}
-        onMouseMove={this.handleCellMouseMove}
+        onMouseMove={this.handleMouseMove}
         >
         { cells }
       </div>

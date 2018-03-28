@@ -12,3 +12,15 @@
   width: 100px;
   height: 100px;
 }
+
+#cell0 {
+    background-color:#FC7753;
+}
+
+#cell1 {
+  background-color:#66D7D1;
+}
+
+#cell2 {
+  background-color:#DBD56E;
+}

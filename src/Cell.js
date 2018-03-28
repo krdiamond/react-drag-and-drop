@@ -6,14 +6,22 @@ export default class Cell extends Component {
  render() {
    return (
      <div className="cell"
-          key={this.props.id}
+          key={this.props.idx}
+          id ={this.props.id}
+
           style={{left: this.props.x,
-                  top: this.props.y,
-                  background: colors[this.props.id % colors.length]}}
-          onMouseDown={ (e)=>this.props.onMouseDown(e,this.props.id)}>
-        <div>id: {this.props.id}</div>
+                  top: this.props.y}}
+
+          onMouseDown={(e)=>this.props.findTheMovingCell(e,this.props.idx)}>
+
+        <div>idx: {this.props.idx}</div>
         <div>position: {`(${this.props.x}, ${this.props.y})`} </div>
+
       </div>
     );
   }
 }
+
+//onMouseDown
+//When a cell is clicked, it passes it's event to the findTheMovingCell method
+//along with it's id
