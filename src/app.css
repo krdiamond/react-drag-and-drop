@@ -2,3 +2,13 @@
   background-color:#403D58;
   height: 100vh;
 }
+
+.cell {
+  position: absolute;
+  border: 5px solid #F2EFEA;
+  border-radius: 5px;
+  font-family: monospace;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+  width: 100px;
+  height: 100px;
+}
