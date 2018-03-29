@@ -23,8 +23,8 @@ class App extends Component {
 
 //---------------------------------------------------------- WHEN BOX IS CLICKED
 //this receives the onclick event and idx through props from the cell
-//
   findTheMovingCellOnMouseDown = (e, idx) => {
+    // e.persist or console.log e.clientX
     this.setState({
       oldMouseX: e.clientX,
       oldMouseY: e.clientY,
@@ -44,7 +44,7 @@ class App extends Component {
     };
     let holdIndex = this.state.holdIndex;
     if(holdIndex >= 0) {
-      newState.cells = this.state.cells.slice();
+      newState.cells = this.state.cells;
       let target = newState.cells[holdIndex];
       target.x += dx;
       target.y += dy;

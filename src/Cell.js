@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { colors } from './Constants';
 
 export default class Cell extends Component {
 
