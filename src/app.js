@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import './app.css';
 import Cell from './Cell';
 import DropZone from './drop_zone'
+import moon from './moon.png'
 
 
 class App extends Component {
@@ -23,9 +24,9 @@ class App extends Component {
       mouseX: 0,
       mouseY: 0,
       cells: [
-        {x:100, y:100, idx:0, id:'cell0'},
-        {x:150, y:150, idx:1, id:'cell1'},
-        {x:200, y:200, idx:2, id:'cell2'}
+        {x:100, y:100, idx:0, id:'cell0', img:moon},
+        {x:150, y:150, idx:1, id:'cell1', img:moon},
+        {x:200, y:200, idx:2, id:'cell2', img:moon}
       ],
       holdIndex: -1,
     };
@@ -61,7 +62,7 @@ class App extends Component {
       // console.log(dropZone.right - dropZone.width)
       if(target.x < dropZone.right &&
         target.x > (dropZone.right - dropZone.width - 100) &&
-        target.y < dropZone.bottom && 
+        target.y < dropZone.bottom &&
         target.y > (dropZone.bottom - dropZone.height-100)){
         console.log("i'm here")
       }
@@ -83,6 +84,7 @@ class App extends Component {
             idx={cell.idx}
             x={cell.x}
             y={cell.y}
+            img={cell.img}
             findTheMovingCell={this.findTheMovingCellOnMouseDown}
           />
         );
@@ -90,9 +92,9 @@ class App extends Component {
     );
 
     return (
-      <div>
+      <div id="app">
         <DropZone ref='DropZone'/>
-        <div id = "app" onMouseUp={this.handleMouseUp} onMouseMove={this.handleMouseMove}> { cells }</div>
+        <div onMouseUp={this.handleMouseUp} onMouseMove={this.handleMouseMove}> { cells }</div>
       </div>
     );
   }

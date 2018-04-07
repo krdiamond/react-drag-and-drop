@@ -5,25 +5,22 @@
 
 .cell {
   position: absolute;
-  border: 5px solid #F2EFEA;
-  border-radius: 5px;
-  font-family: monospace;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
+  z-index: 4;
 }
 
-#cell0 {
-  background-color:#FC7753;
+.moon {
+    position: absolute;
+    z-index: -100;
+    top: 0px;
 }
 
-#cell1 {
-  background-color:#66D7D1;
+#clearbox {
+  width:132px;
+  height:132px;
 }
 
-#cell2 {
-  background-color:#DBD56E;
-}
 
 #drop_zone {
   position: absolute;
