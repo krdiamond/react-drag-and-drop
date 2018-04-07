@@ -3,10 +3,19 @@
 // I will add this back in when I understand everything
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './app.css';
 import Cell from './Cell';
+import DropZone from './drop_zone'
+
 
 class App extends Component {
+
+
+  findDropZone = () => {
+    let dropZone = ReactDOM.findDOMNode(this.refs['DropZone']).getBoundingClientRect()
+    return dropZone
+  }
 
     state = {
       oldMouseX: 0,
@@ -34,20 +43,28 @@ class App extends Component {
 
 //---------------------------------------------------------- WHEN BOX IS DRAGGED
   handleMouseMove = (e) => {
-    //console.log('mouse move');
-    let dx = e.clientX - this.state.mouseX;;
-    let dy = e.clientY - this.state.mouseY;
+    // console.log(this.state.cells[2]);
 
     let newState = {
       mouseX: e.clientX,
-      mouseY: e.clientY
+      mouseY: e.clientY,
+      holdIndex: this.state.holdIndex,
     };
-    let holdIndex = this.state.holdIndex;
-    if(holdIndex >= 0) {
+
+    if(newState.holdIndex >= 0) {
       newState.cells = this.state.cells;
-      let target = newState.cells[holdIndex];
-      target.x += dx;
-      target.y += dy;
+      let target = newState.cells[this.state.holdIndex];
+      target.x += e.clientX - this.state.mouseX;
+      target.y += e.clientY - this.state.mouseY;
+      let dropZone = this.findDropZone()
+      // console.log(dropZone)
+      // console.log(dropZone.right - dropZone.width)
+      if(target.x < dropZone.right &&
+        target.x > (dropZone.right - dropZone.width - 100) &&
+        target.y < dropZone.bottom && 
+        target.y > (dropZone.bottom - dropZone.height-100)){
+        console.log("i'm here")
+      }
     }
     this.setState(newState);
   }
@@ -57,9 +74,7 @@ class App extends Component {
     this.setState({holdIndex: -1});
   }
 
-//----------------------------------------------------------------------- RENDER
   render() {
-//----------------------------------------------- MAP THROUGH ALL BOXES IN STATE
     let cells = this.state.cells.map((cell) => {
         return (
           <Cell
@@ -75,16 +90,16 @@ class App extends Component {
     );
 
     return (
-      <div
-        id = "app"
-        onMouseUp={this.handleMouseUp}
-        onMouseMove={this.handleMouseMove}
-        >
-        { cells }
+      <div>
+        <DropZone ref='DropZone'/>
+        <div id = "app" onMouseUp={this.handleMouseUp} onMouseMove={this.handleMouseMove}> { cells }</div>
       </div>
     );
   }
 }
+
+
+
 
 
 export default App;
