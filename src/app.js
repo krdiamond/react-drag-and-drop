@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './app.css';
 import Cell from './Cell';
-import DropZone from './drop_zone'
 import moon from './moon.png'
 
 
@@ -93,15 +92,12 @@ class App extends Component {
 
     return (
       <div id="app">
-        <DropZone ref='DropZone'/>
+        <div id="drop_zone" ref='DropZone'> DROP ZONE</div>
         <div onMouseUp={this.handleMouseUp} onMouseMove={this.handleMouseMove}> { cells }</div>
       </div>
     );
   }
 }
-
-
-
 
 
 export default App;
